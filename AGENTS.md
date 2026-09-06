@@ -82,7 +82,7 @@ npm pack
 
 # 安装到 PicList
 cd ~/Library/Application\ Support/piclist
-npm install /tmp/picgo-plugin-immich-1.0.0.tgz
+npm install /tmp/picgo-plugin-immich-up-1.0.0.tgz
 
 # 重启 PicList
 ```
@@ -121,7 +121,7 @@ npm publish
 搜索 "immich" 并安装
 
 # 命令行
-npm install picgo-plugin-immich
+npm install picgo-plugin-immich-up
 ```
 
 ## 已知限制
@@ -132,5 +132,5 @@ npm install picgo-plugin-immich
 
 ## 联系方式
 
-- GitHub: https://github.com/carltony/picgo-plugin-immich
-- Issues: https://github.com/carltony/picgo-plugin-immich/issues
+- GitHub: https://github.com/carltony/picgo-plugin-immich-up
+- Issues: https://github.com/carltony/picgo-plugin-immich-up/issues

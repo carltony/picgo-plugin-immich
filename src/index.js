@@ -1,7 +1,7 @@
 'use strict'
 
 /**
- * picgo-plugin-immich
+ * picgo-plugin-immich-up
  * Uploader for Immich (https://immich.app), compatible with the current
  * Immich REST API documented at https://api.immich.app
  *

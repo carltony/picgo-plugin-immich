@@ -24,12 +24,12 @@
   "peerDependencies": {
     "picgo": ">=1.4.0"
   },
-  "homepage": "https://github.com/carltony/picgo-plugin-immich#readme",
+  "homepage": "https://github.com/carltony/picgo-plugin-immich-up#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/carltony/picgo-plugin-immich.git"
+    "url": "git+https://github.com/carltony/picgo-plugin-immich-up.git"
   },
   "bugs": {
-    "url": "https://github.com/carltony/picgo-plugin-immich/issues"
+    "url": "https://github.com/carltony/picgo-plugin-immich-up/issues"
   }
 }

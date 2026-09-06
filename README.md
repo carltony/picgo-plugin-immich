@@ -1,4 +1,4 @@
-# picgo-plugin-immich
+# picgo-plugin-immich-up
 
 PicList/PicGo 插件，用于将图片上传到 [Immich](https://immich.app) 自托管照片管理系统。
 
@@ -21,7 +21,7 @@ PicList/PicGo 插件，用于将图片上传到 [Immich](https://immich.app) 自
 ### 通过命令行
 
 ```bash
-npm install picgo-plugin-immich
+npm install picgo-plugin-immich-up
 ```
 
 ## 配置
@@ -64,7 +64,7 @@ npm pack
 
 # 安装到 PicList 测试
 cd ~/Library/Application\ Support/piclist
-npm install /path/to/picgo-plugin-immich-1.0.0.tgz
+npm install /path/to/picgo-plugin-immich-up-1.0.0.tgz
 
 # 重启 PicList
 ```
