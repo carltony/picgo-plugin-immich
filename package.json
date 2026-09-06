@@ -1,0 +1,35 @@
+{
+  "name": "picgo-plugin-immich",
+  "version": "1.0.0",
+  "description": "PicList/PicGo plugin for uploading images to Immich self-hosted photo management",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node src/test.js"
+  },
+  "keywords": [
+    "picgo",
+    "picgo-gui-plugin",
+    "picgo-plugin",
+    "piclist",
+    "immich",
+    "uploader",
+    "photo-management",
+    "self-hosted"
+  ],
+  "author": "ultart.cn <support@ultart.cn> (https://github.com/carltony)",
+  "license": "MIT",
+  "dependencies": {
+    "form-data": "^4.0.0"
+  },
+  "peerDependencies": {
+    "picgo": ">=1.4.0"
+  },
+  "homepage": "https://github.com/carltony/picgo-plugin-immich#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carltony/picgo-plugin-immich.git"
+  },
+  "bugs": {
+    "url": "https://github.com/carltony/picgo-plugin-immich/issues"
+  }
+}
