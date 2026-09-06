@@ -1,5 +1,5 @@
 {
-  "name": "picgo-plugin-immich",
+  "name": "picgo-plugin-immich-up",
   "version": "1.0.0",
   "description": "PicList/PicGo plugin for uploading images to Immich self-hosted photo management",
   "main": "src/index.js",
