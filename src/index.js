@@ -309,6 +309,33 @@ function extractAssetId(imgUrl) {
   return match ? match[1] : null
 }
 
+async function cleanupShareLinks(ctx, { url, token, assetId }) {
+  try {
+    const { parsed } = await jsonRequest(ctx, {
+      method: 'GET',
+      url: `${buildApiBase(url)}/shared-links`,
+      token,
+    })
+
+    if (!Array.isArray(parsed)) return
+
+    const linksToDelete = parsed.filter(link =>
+      link.assets && link.assets.some(a => a.id === assetId)
+    )
+
+    for (const link of linksToDelete) {
+      await jsonRequest(ctx, {
+        method: 'DELETE',
+        url: `${buildApiBase(url)}/shared-links/${link.id}`,
+        token,
+      })
+      ctx.log.info(`[Immich] 分享链接已删除: ${link.id}`)
+    }
+  } catch (err) {
+    ctx.log.warn(`[Immich] 清理分享链接失败: ${err.message}`)
+  }
+}
+
 module.exports = (ctx) => {
   const register = () => {
     ctx.helper.uploader.register('immich', {
@@ -317,39 +344,31 @@ module.exports = (ctx) => {
       handle,
     })
 
-    if (ctx.server && ctx.server.registerPost) {
-      ctx.server.registerPost('/delete', async (c) => {
-        try {
-          const body = await c.req.json()
-          const userConfig = getUploaderConfig(ctx)
-          const { url, token } = userConfig
+    ctx.on('remove', (files, guiApi) => {
+      const userConfig = getUploaderConfig(ctx)
+      const { url, token } = userConfig
+      if (!url || !token) return
 
-          if (!url || !token) {
-            return c.json({ success: false, message: '未配置 Immich 服务器地址或 API Key' }, 400)
-          }
+      for (const file of files) {
+        if (file.type !== 'immich') continue
 
-          const imgUrl = body.imgUrl || (body.list && body.list[0] && body.list[0].imgUrl)
-          const assetId = extractAssetId(imgUrl)
+        const assetId = extractAssetId(file.imgUrl || file.url)
+        if (!assetId) continue
 
-          if (!assetId) {
-            return c.json({ success: false, message: '无法从链接中提取资产 ID' }, 400)
-          }
+        jsonRequest(ctx, {
+          method: 'DELETE',
+          url: `${buildApiBase(url)}/assets`,
+          token,
+          body: { ids: [assetId] },
+        }).then(() => {
+          ctx.log.info(`[Immich] 资产已删除: ${assetId}`)
+        }).catch((err) => {
+          ctx.log.warn(`[Immich] 删除资产失败 ${assetId}: ${err.message}`)
+        })
 
-          await jsonRequest(ctx, {
-            method: 'DELETE',
-            url: `${buildApiBase(url)}/assets`,
-            token,
-            body: { ids: [assetId] },
-          })
-
-          ctx.log.info(`Immich 资产已删除: ${assetId}`)
-          return c.json({ success: true, message: '删除成功' })
-        } catch (err) {
-          ctx.log.error(`Immich 删除失败: ${err.message}`)
-          return c.json({ success: false, message: err.message }, 500)
-        }
-      })
-    }
+        cleanupShareLinks(ctx, { url, token, assetId })
+      }
+    })
   }
 
   return {
