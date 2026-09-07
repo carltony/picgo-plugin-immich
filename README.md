@@ -50,11 +50,7 @@ npm install picgo-plugin-immich-up
 
 ## 删除
 
-PicList 的内置云删除不支持自定义图床类型。本插件通过 PicList 脚本系统实现删除：
-
-安装后，删除功能自动生效。当在 PicList 图库中删除图片时，脚本会调用 Immich API 同步删除云端资源。
-
-脚本位置：`~/.piclist/scripts/onGalleryRemove/immich-delete.js`
+插件监听 PicGo/PicList 原生的 `remove` 事件，当在图库中删除图片时自动同步删除 Immich 资源并清理关联的分享链接。安装后无需额外配置，删除功能自动生效。
 
 ## 开发
 
@@ -64,7 +60,7 @@ npm pack
 
 # 安装到 PicList 测试
 cd ~/Library/Application\ Support/piclist
-npm install /path/to/picgo-plugin-immich-up-1.0.0.tgz
+npm install /path/to/picgo-plugin-immich-up-1.0.2.tgz
 
 # 重启 PicList
 ```
